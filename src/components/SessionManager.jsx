@@ -8,6 +8,7 @@ function SessionManager() {
   const [ballVelocityX, setBallVelocityX] = useState(0);
   const [ballVelocityY, setBallVelocityY] = useState(0);
   const [gameInstance, setGameInstance] = useState(null);
+  const [isSessionActive, setIsSessionActive] = useState(false);
 
   useEffect(() => {
     function preload() {
@@ -70,6 +71,10 @@ function SessionManager() {
   };
 
   const startSession = () => {
+    if (isSessionActive) {
+      return;
+    }
+    setIsSessionActive(true);
     const id = generateSessionID();
     const initialCountdown = generateCountdown();
     const startTime = new Date();
